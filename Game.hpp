@@ -23,8 +23,8 @@ private:
     Ant ** ants;
     Doodlebug ** doodlebugs;
 
-    Ant * create_ant();
-    Doodlebug * create_doodlebug();
+    Ant * create_ant(int y, int x);
+    Doodlebug * create_doodlebug(int y, int x);
 
     void remove_ant(int y, int x);
 };

@@ -21,7 +21,8 @@ private:
     int life; // num steps it has survived
 public:
     Critter();
-    virtual char move(Board b)=0;
+    virtual char move(Board b) = 0;
+    virtual char breed(board b) = 0;
 };
 
 #endif

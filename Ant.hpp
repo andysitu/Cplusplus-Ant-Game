@@ -14,6 +14,7 @@ class Ant: public Critter
 {
 public:
     virtual char move(Board b);
+    virtual char breed(board b);
 };
 
 #endif
