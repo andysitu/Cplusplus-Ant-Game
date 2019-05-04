@@ -12,6 +12,8 @@
 #include "Ant.hpp";
 #include "Doodlebug.hpp"
 
+#include "Helper.hpp"
+
 class Game
 {
 private:

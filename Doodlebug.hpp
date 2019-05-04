@@ -17,7 +17,7 @@ private:
 public:
     bool will_starve(); // checks if DoodleBug will starve, returns true if so
     virtual char move(Board b);
-    virtual char breed(board b);
+    virtual char breed(Board b);
 };
 
 #endif

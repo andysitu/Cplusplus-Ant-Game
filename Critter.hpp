@@ -22,7 +22,7 @@ private:
 public:
     Critter();
     virtual char move(Board b) = 0;
-    virtual char breed(board b) = 0;
+    virtual char breed(Board b) = 0;
 };
 
 #endif
