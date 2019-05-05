@@ -35,18 +35,17 @@ void Game::start_game()
     board.create_board(row, col);
 
     bool correct_num_bugs = false;
-
-    int num_ants;
-    int num_doodlebugs;
+    int ants_input;
+    int doodlebugs_input;
 
     while (!correct_num_bugs) { // Make sure that # bugs does not exceed board
         std::cout << "How many ants would you like?" << std::endl;
-        num_ants = Helper::getIntInput(10, 100);
+        ants_input = Helper::getIntInput(10, 100);
 
         std::cout << "How many doodlebugs would you like?" << std::endl;
-        num_doodlebugs = Helper::getIntInput(10, 100);
+        doodlebugs_input = Helper::getIntInput(10, 100);
 
-        if ((num_doodlebugs * num_ants) <= (row * col)) {
+        if ((doodlebugs_input * ants_input) <= (row * col)) {
             correct_num_bugs = true;
         }
         else {
@@ -55,31 +54,31 @@ void Game::start_game()
         }
     }
 
-    // Randomly place bugs until they're completely placed on board
-    int ants_placed = 0,
-        doodlebugs_placed = 0;
+    ants_array_size = ants_input * 2;
+    doodlebug_array_size = doodlebugs_input * 2;
 
-    for (int i = 0; i < num_ants; i++) {
+    ants = new Ant*[ants_array_size];
+    doodlebugs = new Doodlebug*[doodlebug_array_size];
+
+    for (int i = 0; i < ants_input; i++) {
         bool found_empty_spot = false;
         while (!found_empty_spot) {
             int random_row = Helper::randInt(0, row - 1),
                 random_col = Helper::randInt(0, col - 1);
-            if (board.get_type(random_col, random_col) == "empty") {
-                Ant * a = create_ant(random_col, random_col);
-                board.add_critter(random_row, random_col, a);
+            if (board.get_type(random_row, random_col) == "empty") {
+                create_ant(random_row, random_col);
                 found_empty_spot = true;
             }
         }
     }
-
-    for (int i = 0; i < num_doodlebugs; i++) {
+    
+    for (int i = 0; i < doodlebugs_input; i++) {
         bool found_empty_spot = false;
         while (!found_empty_spot) {
             int random_row = Helper::randInt(0, row - 1),
                 random_col = Helper::randInt(0, col - 1);
-            if (board.get_type(random_col, random_col) == "empty") {
-                Doodlebug * d = create_doodlebug(random_col, random_col);
-                board.add_critter(random_row, random_col, d);
+            if (board.get_type(random_row, random_col) == "empty") {
+                create_doodlebug(random_row, random_col);
                 found_empty_spot = true;
             }
         }
@@ -88,12 +87,49 @@ void Game::start_game()
     board.print_board();
 }
 
-Ant * Game::create_ant(int row, int col)
+void Game::create_ant(int row, int col)
 {
-   return new Ant( row, col);
+    Ant * a =  new Ant( row, col);
+    board.add_critter(row, col, a);
+
+    num_ants++;
+
+    if (num_ants > ants_array_size) {
+
+        std::cout << num_ants << "ANTS" << ants_array_size;
+        int old_arr_size = ants_array_size;
+        ants_array_size = num_ants * 2;
+        Ant ** new_ants = new Ant*[ants_array_size];
+        for (int i = 0; i < old_arr_size; i++) {
+            new_ants[i] = ants[i];
+        }
+        delete[] ants;
+        ants = nullptr;
+
+        ants = new_ants;
+    }
+    ants[num_ants] = a;
 }
 
-Doodlebug * Game::create_doodlebug(int row, int col)
+void Game::create_doodlebug(int row, int col)
 {
-    return new Doodlebug(row, col);
+    Doodlebug * d = new Doodlebug(row, col);
+    board.add_critter(row, col, d);
+
+    num_doodlebugs++;
+
+    if (num_doodlebugs > doodlebug_array_size) {
+        std::cout << "D" << doodlebug_array_size;
+        int old_arr_size = doodlebug_array_size;
+        doodlebug_array_size = num_doodlebugs * 2;
+        Doodlebug ** new_doodlebugs = new Doodlebug*[doodlebug_array_size];
+        for (int i = 0; i < old_arr_size; i++) {
+            new_doodlebugs[i] = doodlebugs[i];
+        }
+        delete[] doodlebugs;
+        doodlebugs = nullptr;
+
+        doodlebugs = new_doodlebugs;
+    }
+    doodlebugs[num_doodlebugs] = d;
 }

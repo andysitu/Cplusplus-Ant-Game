@@ -26,8 +26,13 @@ private:
     Ant ** ants;
     Doodlebug ** doodlebugs;
 
-    Ant * create_ant(int y, int x);
-    Doodlebug * create_doodlebug(int y, int x);
+    int num_ants;
+    int num_doodlebugs;
+    int ants_array_size; 
+    int doodlebug_array_size;
+
+    void create_ant(int y, int x);
+    void create_doodlebug(int y, int x);
 
     void remove_ant(int y, int x);
     void start_game();
