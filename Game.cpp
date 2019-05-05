@@ -95,8 +95,6 @@ void Game::create_ant(int row, int col)
     num_ants++;
 
     if (num_ants > ants_array_size) {
-
-        std::cout << num_ants << "ANTS" << ants_array_size;
         int old_arr_size = ants_array_size;
         ants_array_size = num_ants * 2;
         Ant ** new_ants = new Ant*[ants_array_size];
@@ -119,7 +117,6 @@ void Game::create_doodlebug(int row, int col)
     num_doodlebugs++;
 
     if (num_doodlebugs > doodlebug_array_size) {
-        std::cout << "D" << doodlebug_array_size;
         int old_arr_size = doodlebug_array_size;
         doodlebug_array_size = num_doodlebugs * 2;
         Doodlebug ** new_doodlebugs = new Doodlebug*[doodlebug_array_size];
