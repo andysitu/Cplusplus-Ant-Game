@@ -23,7 +23,9 @@ char Critter::breed(Board board)
     // Direction to breed in, no direction = ' '
     char result = ' ';
 
-    if (life < adult_life)
+    if (life == 0)
+        return result;
+    else if ((life % adult_life) != 0)
         return result;
 
     // Checked directions U, R, D, L
