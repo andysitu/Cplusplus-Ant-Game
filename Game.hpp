@@ -36,6 +36,8 @@ private:
 
     void remove_ant(int y, int x);
     void start_game();
+
+    int * get_new_coordinates(int row, int col, char direction);
 public:
     Game();
 };

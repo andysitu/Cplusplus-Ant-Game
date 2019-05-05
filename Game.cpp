@@ -40,10 +40,10 @@ void Game::start_game()
 
     while (!correct_num_bugs) { // Make sure that # bugs does not exceed board
         std::cout << "How many ants would you like?" << std::endl;
-        ants_input = Helper::getIntInput(10, 100);
+        ants_input = Helper::getIntInput(1, 100);
 
         std::cout << "How many doodlebugs would you like?" << std::endl;
-        doodlebugs_input = Helper::getIntInput(10, 100);
+        doodlebugs_input = Helper::getIntInput(1, 100);
 
         if ((doodlebugs_input * ants_input) <= (row * col)) {
             correct_num_bugs = true;
@@ -84,7 +84,20 @@ void Game::start_game()
         }
     }
 
-    board.print_board();
+    int num_steps = 10;
+
+    std::cout << "How many steps would you like to run of the simulatin?" << std::endl;
+    num_steps = Helper::getIntInput(1, 10000);
+    run_steps(num_steps);
+
+    while (num_steps > 0) {
+        std::cout << "How many steps would you like to run of the simulatin?" << std::endl;
+        std::cout << "Enter 0 to quit the game." << std::endl;
+        num_steps = Helper::getIntInput(0, 10000);
+
+        if (num_steps)
+            run_steps(num_steps);
+    }
 }
 
 void Game::create_ant(int row, int col)
@@ -129,4 +142,26 @@ void Game::create_doodlebug(int row, int col)
         doodlebugs = new_doodlebugs;
     }
     doodlebugs[num_doodlebugs] = d;
+}
+
+void Game::run_steps(int num_steps)
+{
+    for (int i = 0; i < num_steps; i++)
+        run_step();
+}
+
+void Game::run_step()
+{
+    std::string dir;
+    // Run Doodlebugs thru the array
+    for (int i = 0; i < num_doodlebugs; i++) {
+        dir = doodlebugs[i]->move(board);
+    }
+
+    // Run Ants thru the array
+}
+
+int * Game::get_new_coordinates(int row, int col, char direction)
+{
+    return board.get_new_coordinates(row, col, direction);
 }

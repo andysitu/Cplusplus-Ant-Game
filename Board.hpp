@@ -32,6 +32,8 @@ public:
     std::string get_type(int row, int col);
 
     void create_board(int row, int col);
+
+    int * get_new_coordinates(int row, int col, char direction);
 };
 
 #endif

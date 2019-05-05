@@ -60,3 +60,39 @@ void Board::remove_critter(int row, int col)
         board[row][col] = nullptr;
     }
 }
+
+int * Board::get_new_coordinates(int row, int col, char direction)
+{
+    int coords[2] = {};
+    coords[0] = row;
+    coords[1] = col;
+
+    if (direction == 'U') { // UP
+        coords[0] += 1;
+    }
+    else if (direction == 'D') // DOWN
+    {
+        coords[0] += 1;
+    }
+    else if (direction == 'L') // LEFT
+    {
+        coords[1] -= 1;
+    }
+    else if (direction == 'R') // RIGHT
+    {
+        coords[1] += 1;
+    }
+
+    // Check if row is out of bounds
+    if (coords[0] < 0)
+        coords[0] = 0;
+    if (coords[0] > num_row - 1)
+        coords[0] = num_row - 1;
+    if (coords[1] < 0)
+        coords[1] = 0;
+    if (coords[1] > num_col - 1)
+        coords[1] = num_col - 1;
+
+     return coords;
+
+}
