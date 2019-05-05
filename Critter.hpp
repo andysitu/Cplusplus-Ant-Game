@@ -23,6 +23,8 @@ public:
     Critter();
     virtual char move(Board b) = 0;
     virtual char breed(Board b) = 0;
+
+    std::string get_type() { return type_name; }
 };
 
 #endif

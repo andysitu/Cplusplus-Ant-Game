@@ -10,6 +10,7 @@
 
 #include "Critter.hpp"
 #include <string>
+#include <iostream>
 
 class Critter;
 
