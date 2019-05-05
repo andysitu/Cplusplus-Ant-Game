@@ -43,3 +43,20 @@ std::string Board::get_type(int row, int col)
         return piece->get_type();
     }
 }
+
+void Board::add_critter(int row, int col, Critter * c)
+{
+    // If it's not blank, delete the old critter
+    if (board[row][col]) {
+        remove_critter(row, col);
+    }
+    board[row][col] = c;
+}
+
+void Board::remove_critter(int row, int col)
+{
+    if (board[row][col]) {
+        delete board[row][col];
+        board[row][col] = nullptr;
+    }
+}

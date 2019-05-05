@@ -22,6 +22,7 @@ private:
     void run_step();
     void run_steps(int num_steps);
 
+    // Array of ant pointers
     Ant ** ants;
     Doodlebug ** doodlebugs;
 

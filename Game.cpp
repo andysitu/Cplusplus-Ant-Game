@@ -60,10 +60,40 @@ void Game::start_game()
         doodlebugs_placed = 0;
 
     for (int i = 0; i < num_ants; i++) {
-        
+        bool found_empty_spot = false;
+        while (!found_empty_spot) {
+            int random_row = Helper::randInt(0, row - 1),
+                random_col = Helper::randInt(0, col - 1);
+            if (board.get_type(random_col, random_col) == "empty") {
+                Ant * a = create_ant(random_col, random_col);
+                board.add_critter(random_row, random_col, a);
+                found_empty_spot = true;
+            }
+        }
     }
 
     for (int i = 0; i < num_doodlebugs; i++) {
-        
+        bool found_empty_spot = false;
+        while (!found_empty_spot) {
+            int random_row = Helper::randInt(0, row - 1),
+                random_col = Helper::randInt(0, col - 1);
+            if (board.get_type(random_col, random_col) == "empty") {
+                Doodlebug * d = create_doodlebug(random_col, random_col);
+                board.add_critter(random_row, random_col, d);
+                found_empty_spot = true;
+            }
+        }
     }
+
+    board.print_board();
+}
+
+Ant * Game::create_ant(int row, int col)
+{
+   return new Ant( row, col);
+}
+
+Doodlebug * Game::create_doodlebug(int row, int col)
+{
+    return new Doodlebug(row, col);
 }

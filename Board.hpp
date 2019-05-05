@@ -22,9 +22,9 @@ private:
     int num_col;
 public:
     void print_board();
-    int add_critter(int y, int x, Critter *);
-    int move_critter(int y, int x, char direction);
-    int remove_critter(int y, int x);
+    void add_critter(int y, int x, Critter *);
+    void move_critter(int y, int x, char direction);
+    void remove_critter(int y, int x);
 
     bool out_of_bounds(int row, int col, char direction);
     int get_num_row() { return num_row; };
