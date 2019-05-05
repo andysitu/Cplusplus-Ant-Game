@@ -6,3 +6,34 @@
 *************************************************************/
 
 #include "Ant.hpp"
+
+Ant::Ant(int r, int c)
+{
+    adult_life = 3;
+    life = 0;
+    row = r;
+    col = c;
+    type_name = "Ant";
+}
+
+char Ant::move(Board b)
+{
+    //Randomly pick 1 of 4 cardinal directions
+    int breedDir = Helper::randInt(0, 3);
+
+    //Up for 0
+    if (breedDir == 0)
+        return 'U';
+
+    //Right for 1
+    else if (breedDir == 1)
+        return 'R';
+
+    //Down for 2
+    else if (breedDir == 2)
+        return 'D';
+
+    //Left for 3
+    else
+        return 'L';
+}
