@@ -10,6 +10,12 @@
 
 #include "Critter.hpp"
 
+/*************************************************************
+* Returns a direction if the bug can breed a new bug and place
+*   it to that direction, which will be empty. Otherwise,
+*   if it's full or if bug is not an adult yet, it will
+*   return ' '
+*************************************************************/
 char Critter::breed(Board board)
 {
     int boardRow = board.get_num_row(),

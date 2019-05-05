@@ -23,6 +23,7 @@ protected:
     std::string type_name;
     int life; // num steps it has survived
 public:
+    // NOTE: DIRECTIONS ARE 'R', 'L', 'U', 'D', AND ' '
     virtual char move(Board b) = 0;
     virtual char breed(Board b);
 
