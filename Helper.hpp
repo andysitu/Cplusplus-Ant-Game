@@ -11,10 +11,13 @@
 
 #include <iostream>
 
+
 class Helper
 {
 public:
     static int getIntInput(int minValue, int maxValue);
+    static void set_srand();
+    static int randInt(int min, int max);
 };
 
 #endif

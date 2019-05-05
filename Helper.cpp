@@ -9,6 +9,10 @@
 #include "Helper.hpp"
 #include <iostream>
 #include <string>
+#include <ctype.h> // for isdigit
+
+#include <ctime> // For rand
+#include <stdio.h>
 
 using std::cout;
 using std::endl;
@@ -51,4 +55,21 @@ int Helper::getIntInput(int minValue, int maxValue)
         std::cout << std::endl;
     }
     return intValue;
+}
+
+/*********************************************************************
+ * Set srand before using randInt.
+*********************************************************************/
+void Helper::set_srand()
+{
+    srand(time(nullptr));
+}
+
+/*********************************************************************
+ * Give a random number between min and max.
+ * Requirement: Need to set srand (set_srand) once before using.
+*********************************************************************/
+int Helper::randInt(int min, int max)
+{
+    return rand() % (max + 1 - min) + min;
 }
