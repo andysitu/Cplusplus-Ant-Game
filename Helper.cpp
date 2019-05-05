@@ -7,6 +7,11 @@
 **********************************************************************/
 
 #include "Helper.hpp"
+#include <iostream>
+#include <string>
+
+using std::cout;
+using std::endl;
 
 /*********************************************************************
  *  Gets User input for positive integers only from minValue to maxValue.
@@ -46,3 +51,4 @@ int Helper::getIntInput(int minValue, int maxValue)
         std::cout << std::endl;
     }
     return intValue;
+}
