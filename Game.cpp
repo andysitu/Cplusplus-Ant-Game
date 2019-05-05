@@ -63,20 +63,23 @@ void Game::start_game()
         while (!found_empty_spot) {
             int random_row = Helper::randInt(0, row - 1),
                 random_col = Helper::randInt(0, col - 1);
-            if (board.get_type(random_col, random_col) == "empty") {
-                create_ant(random_col, random_col);
+            if (board.get_type(random_row, random_col) == "empty") {
+                create_ant(random_row, random_col);
                 found_empty_spot = true;
             }
+            board.print_board();
+            std::cout << random_row << random_col << std::endl << found_empty_spot;
         }
     }
-
+    std::cout << "d";
+    
     for (int i = 0; i < num_doodlebugs; i++) {
         bool found_empty_spot = false;
         while (!found_empty_spot) {
             int random_row = Helper::randInt(0, row - 1),
                 random_col = Helper::randInt(0, col - 1);
-            if (board.get_type(random_col, random_col) == "empty") {
-                create_doodlebug(random_col, random_col);
+            if (board.get_type(random_row, random_col) == "empty") {
+                create_doodlebug(random_row, random_col);
                 found_empty_spot = true;
             }
         }
@@ -87,7 +90,7 @@ void Game::start_game()
 
 void Game::create_ant(int row, int col)
 {
-    Ant * a=  new Ant( row, col);
+    Ant * a =  new Ant( row, col);
     board.add_critter(row, col, a);
 
     num_ants++;
@@ -114,6 +117,7 @@ void Game::create_doodlebug(int row, int col)
     board.add_critter(row, col, d);
 
     num_doodlebugs++;
+
     if (num_doodlebugs > doodlebug_array_size) {
         std::cout << "TEST";
         int old_arr_size = doodlebug_array_size;
