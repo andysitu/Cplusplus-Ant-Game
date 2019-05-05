@@ -7,7 +7,7 @@
 
 #include "Board.hpp"
 
-Board::Board(int y, int x)
+void Board::create_board(int y, int x)
 {
     board = new Critter**[y];
     for (int i = 0; i < y; i++) {

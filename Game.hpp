@@ -9,7 +9,7 @@
 #define GAME_HPP
 
 #include "Board.hpp"
-#include "Ant.hpp";
+#include "Ant.hpp"
 #include "Doodlebug.hpp"
 
 #include "Helper.hpp"
@@ -29,6 +29,9 @@ private:
     Doodlebug * create_doodlebug(int y, int x);
 
     void remove_ant(int y, int x);
+    void start_game();
+public:
+    Game();
 };
 
 #endif
