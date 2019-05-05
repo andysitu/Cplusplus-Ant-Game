@@ -7,10 +7,12 @@
 
 #include "Board.hpp"
 
-void Board::create_board(int y, int x)
+void Board::create_board(int row, int col)
 {
-    board = new Critter**[y];
-    for (int i = 0; i < y; i++) {
-        board[i] = new Critter*[x] {nullptr};
+    num_col = col;
+    num_row = row;
+    board = new Critter**[row];
+    for (int i = 0; i < row; i++) {
+        board[i] = new Critter*[col]{nullptr};
     }
 }

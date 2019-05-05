@@ -28,7 +28,7 @@ public:
     bool out_of_bounds(int row, int col, char direction);
     std::string get_type(int row, int col);
 
-    void create_board(int y, int x);
+    void create_board(int row, int col);
 };
 
 #endif
