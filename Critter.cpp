@@ -30,10 +30,9 @@ char Critter::check_breed(Board board)
 
     // Checked directions U, R, D, L
     bool checked[4] = { false, false, false, false };
-    bool allChecked = false;
 
     //Check all directions before returning default value
-    while (checked[0] == true && checked[1] == true && checked[2] == true && checked[3] == true)
+    while (checked[0] != true && checked[1] != true && checked[2] != true && checked[3] != true)
     {
         //Choose random move direction
         int breedDir = Helper::randInt(0, 3);
@@ -51,6 +50,7 @@ char Critter::check_breed(Board board)
                     result = 'U';
                     return result;
                 }
+                checked[0] = true;
             }
         }
 
@@ -65,6 +65,7 @@ char Critter::check_breed(Board board)
                     result = 'R';
                     return result;
                 }
+                checked[1] = true;
             }
         }
 
@@ -79,6 +80,7 @@ char Critter::check_breed(Board board)
                     result = 'D';
                     return result;
                 }
+                checked[2] = true;
             }
         }
 
@@ -92,6 +94,7 @@ char Critter::check_breed(Board board)
                     result = 'L';
                     return result;
                 }
+                checked[3] = true;
             }
         }
     }

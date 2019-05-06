@@ -142,12 +142,20 @@ int * Board::get_new_coordinates(int row, int col, char direction)
 
 void Board::move_critter(int old_row, int old_col, char direction)
 {
-    int * new_coords = get_new_coordinates(old_row, old_col, direction);
-    int new_row = new_coords[0],
-        new_col = new_coords[1];
+    if (get_type(old_row, old_col, direction).compare("empty") == 0)
+    {
+        int * new_coords = get_new_coordinates(old_row, old_col, direction);
+        int new_row = new_coords[0],
+            new_col = new_coords[1];
 
-    Critter * temp_crit = board[old_row][old_col];
-    board[old_row][old_col] = nullptr;
-    board[new_row][new_col] = temp_crit;
-    temp_crit = nullptr;
+        Critter * temp_crit = board[old_row][old_col];
+        board[old_row][old_col] = nullptr;
+        board[new_row][new_col] = temp_crit;
+        temp_crit = nullptr;
+    }
+    else
+    {
+        std::cout << "ERROR: You're trying to replace a board piece that already exists" << std::endl;
+    }
+    
 }

@@ -28,25 +28,21 @@ char Doodlebug::check_move(Board board)
     if (!board.out_of_bounds(row, col, 'D'))
         if (board.get_type(row, col, 'D').compare("Ant") == 0)
         {
-            std::cout << "ANT";
             return 'D';
         }
     if (!board.out_of_bounds(row, col, 'U'))
         if (board.get_type(row, col, 'U').compare("Ant") == 0)
         {
-            std::cout << "ANT";
             return 'U';
         }
     if (!board.out_of_bounds(row, col, 'R'))
         if (board.get_type(row, col, 'R').compare("Ant") == 0)
         {
-            std::cout << "ANT";
             return 'R';
         }
     if (!board.out_of_bounds(row, col, 'L'))
         if (board.get_type(row, col, 'L').compare("Ant") == 0)
         {
-            std::cout << "ANT";
             return 'L';
         }
 

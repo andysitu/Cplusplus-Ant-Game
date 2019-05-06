@@ -222,6 +222,7 @@ void Game::breed_critter(Critter * critter)
         c_col = critter->getCol();
 
     char breed_dir = critter->check_breed(board);
+    std::cout << "Breed_dir" << breed_dir << std::endl;
     if (breed_dir != ' ')
     {
         int * coords = board.get_new_coordinates(c_row, c_col, breed_dir);
@@ -261,6 +262,8 @@ void Game::remove_critter(std::string type, int index)
     }
     board.remove_critter(row, col); // Board deletes the dynamic memory of the object
 }
+
+
 
 Game::~Game()
 {
