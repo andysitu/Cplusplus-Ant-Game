@@ -20,18 +20,12 @@ class Game
 {
 private:
     Board board;
-    void create_board(int y, int x);
     void run_step();
     void run_steps(int num_steps);
 
     // Array of ant pointers
     std::vector<Ant *> ants;
     std::vector<Doodlebug *> doodlebugs;
-
-    int num_ants;
-    int num_doodlebugs;
-    int ants_array_size; 
-    int doodlebug_array_size;
 
     void create_ant(int y, int x);
     void create_doodlebug(int y, int x);

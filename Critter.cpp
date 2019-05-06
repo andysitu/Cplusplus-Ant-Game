@@ -42,11 +42,10 @@ char Critter::check_breed(Board board)
         if (breedDir == 0)
         {
             checked[0] = true; //Mark the direction as checked
-            int tempRow = row + 1; //Adjust coordinate for new spot
-            if (tempRow < boardRow) //Check if coordinate within bounds
+            if(!board.out_of_bounds(row, col, 'U'))
             {
                 //Check if spot empty
-                if (board.get_type(tempRow, col).compare("empty") == 0)
+                if (board.get_type(row, col, 'U').compare("empty") == 0)
                 {
                     //Set return direction
                     result = 'U';
@@ -59,10 +58,9 @@ char Critter::check_breed(Board board)
         else if (breedDir == 1)
         {
             checked[1] = true;
-            int tempCol = col + 1;
-            if (tempCol < boardCol)
+            if(!board.out_of_bounds(row, col, 'R'))
             {
-                if (board.get_type(row, tempCol).compare("empty") == 0)
+                if (board.get_type(row, row, 'R').compare("empty") == 0)
                 {
                     result = 'R';
                     return result;
@@ -74,10 +72,9 @@ char Critter::check_breed(Board board)
         else if (breedDir == 2)
         {
             checked[2] = true;
-            int tempRow = row - 1;
-            if (tempRow >= 0)
+            if(!board.out_of_bounds(row, col, 'D'))
             {
-                if (board.get_type(tempRow, col).compare("empty") == 0)
+                if (board.get_type(row, col, 'D').compare("empty") == 0)
                 {
                     result = 'D';
                     return result;
@@ -88,11 +85,9 @@ char Critter::check_breed(Board board)
         //Direction left chosen
         else if (breedDir == 3)
         {
-            checked[3] = true;
-            int tempCol = col - 1;
-            if (tempCol >= 0)
+            if(!board.out_of_bounds(row, col, 'L'))
             {
-                if (board.get_type(row, tempCol).compare("empty") == 0)
+                if (board.get_type(row, col, 'L').compare("empty") == 0)
                 {
                     result = 'L';
                     return result;

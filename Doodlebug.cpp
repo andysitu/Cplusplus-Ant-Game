@@ -23,44 +23,32 @@ char Doodlebug::check_move(Board board)
     int boardRow = board.get_num_row(),
         boardCol = board.get_num_col();
 
-    int tempDown = row + 1;
-    int tempUp = row - 1;
-    int tempRight = col + 1;
-    int tempLeft = col - 1;
 
-    //Checks if new coordinates are in bounds and if new resulting
-    //coordinates contain an ant. If so, ask to move there
-    if (tempDown < boardRow)
-    {
+    //Checks for ants
+    if (!board.out_of_bounds(row, col, 'D'))
         if (board.get_type(row, col, 'D').compare("Ant") == 0)
         {
+            std::cout << "ANT";
             return 'D';
         }
-    }
-
-    else if (tempUp > 0)
-    {
+    if (!board.out_of_bounds(row, col, 'U'))
         if (board.get_type(row, col, 'U').compare("Ant") == 0)
         {
+            std::cout << "ANT";
             return 'U';
         }
-    }
-
-    else if (tempRight < boardCol)
-    {
-        if (board.get_type(row, col, 'R') == "Ant")
+    if (!board.out_of_bounds(row, col, 'R'))
+        if (board.get_type(row, col, 'R').compare("Ant") == 0)
         {
+            std::cout << "ANT";
             return 'R';
         }
-    }
-
-    else if (tempLeft > 0)
-    {
-        if (board.get_type(row, col, 'L') == "Ant")
+    if (!board.out_of_bounds(row, col, 'L'))
+        if (board.get_type(row, col, 'L').compare("Ant") == 0)
         {
+            std::cout << "ANT";
             return 'L';
         }
-    }
 
 
     //Randomly pick 1 of 4 cardinal directions
@@ -88,13 +76,13 @@ char Doodlebug::check_move(Board board)
 * Moves Doodlebug and checks if the location had an ant.
 * If so, it has eaten
 *************************************************************/
-void Doodlebug::move(int new_row, int new_col, std::string type)
+void Doodlebug::move(int new_row, int new_col, std::string prev_cell_type)
 {
-    if (type.compare("empty") == 0)
+    if (prev_cell_type.compare("empty") == 0)
     {
         set_loc(new_row, new_col);
     }
-    else if (type.compare("Ant") == 0)
+    else if (prev_cell_type.compare("Ant") == 0)
     {
         set_loc(new_row, new_col);
         ate();
