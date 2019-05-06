@@ -23,12 +23,12 @@ private:
 public:
     void print_board();
     void add_critter(int y, int x, Critter *);
-    void move_critter(int y, int x, char direction);
+    void move_critter(int old_row, int old_col, char direction);
     void remove_critter(int y, int x);
 
-    bool out_of_bounds(int row, int col, char direction);
     int get_num_row() { return num_row; };
     int get_num_col() { return num_col; };
+    std::string get_type(int row, int col, char dir);
     std::string get_type(int row, int col);
 
     void create_board(int row, int col);

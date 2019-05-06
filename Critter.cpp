@@ -16,7 +16,7 @@
 *   if it's full or if bug is not an adult yet, it will
 *   return ' '
 *************************************************************/
-char Critter::breed(Board board)
+char Critter::check_breed(Board board)
 {
     int boardRow = board.get_num_row(),
         boardCol = board.get_num_col();
@@ -46,7 +46,7 @@ char Critter::breed(Board board)
             if (tempRow < boardRow) //Check if coordinate within bounds
             {
                 //Check if spot empty
-                if (board.get_type(tempRow, col) == "empty")
+                if (board.get_type(tempRow, col).compare("empty") == 0)
                 {
                     //Set return direction
                     result = 'U';
@@ -62,7 +62,7 @@ char Critter::breed(Board board)
             int tempCol = col + 1;
             if (tempCol < boardCol)
             {
-                if (board.get_type(row, tempCol) == "empty")
+                if (board.get_type(row, tempCol).compare("empty") == 0)
                 {
                     result = 'R';
                     return result;
@@ -77,7 +77,7 @@ char Critter::breed(Board board)
             int tempRow = row - 1;
             if (tempRow >= 0)
             {
-                if (board.get_type(tempRow, col) == "empty")
+                if (board.get_type(tempRow, col).compare("empty") == 0)
                 {
                     result = 'D';
                     return result;
@@ -92,7 +92,7 @@ char Critter::breed(Board board)
             int tempCol = col - 1;
             if (tempCol >= 0)
             {
-                if (board.get_type(row, tempCol) == "empty")
+                if (board.get_type(row, tempCol).compare("empty") == 0)
                 {
                     result = 'L';
                     return result;
@@ -126,4 +126,19 @@ void Critter::setRow(int r)
 void Critter::setCol(int c)
 {
     col = c;
+}
+
+
+void Critter::set_loc(int r, int c)
+{
+    row = r;
+    col = c;
+}
+
+void Critter::move(int new_row, int new_col, std::string new_cell_type)
+{
+    if (new_cell_type.compare("empty") == 0)
+    {
+        set_loc(new_row, new_col);
+    }
 }

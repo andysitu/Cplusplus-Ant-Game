@@ -54,12 +54,6 @@ void Game::start_game()
         }
     }
 
-    ants_array_size = ants_input * 2;
-    doodlebug_array_size = doodlebugs_input * 2;
-
-    ants = new Ant*[ants_array_size];
-    doodlebugs = new Doodlebug*[doodlebug_array_size];
-
     for (int i = 0; i < ants_input; i++) {
         bool found_empty_spot = false;
         while (!found_empty_spot) {
@@ -107,19 +101,7 @@ void Game::create_ant(int row, int col)
 
     num_ants++;
 
-    if (num_ants > ants_array_size) {
-        int old_arr_size = ants_array_size;
-        ants_array_size = num_ants * 2;
-        Ant ** new_ants = new Ant*[ants_array_size];
-        for (int i = 0; i < old_arr_size; i++) {
-            new_ants[i] = ants[i];
-        }
-        delete[] ants;
-        ants = nullptr;
-
-        ants = new_ants;
-    }
-    ants[num_ants] = a;
+    ants.push_back(a);
 }
 
 void Game::create_doodlebug(int row, int col)
@@ -129,19 +111,7 @@ void Game::create_doodlebug(int row, int col)
 
     num_doodlebugs++;
 
-    if (num_doodlebugs > doodlebug_array_size) {
-        int old_arr_size = doodlebug_array_size;
-        doodlebug_array_size = num_doodlebugs * 2;
-        Doodlebug ** new_doodlebugs = new Doodlebug*[doodlebug_array_size];
-        for (int i = 0; i < old_arr_size; i++) {
-            new_doodlebugs[i] = doodlebugs[i];
-        }
-        delete[] doodlebugs;
-        doodlebugs = nullptr;
-
-        doodlebugs = new_doodlebugs;
-    }
-    doodlebugs[num_doodlebugs] = d;
+    doodlebugs.push_back(d);
 }
 
 void Game::run_steps(int num_steps)
@@ -152,16 +122,143 @@ void Game::run_steps(int num_steps)
 
 void Game::run_step()
 {
-    std::string dir;
+    Doodlebug * db;
     // Run Doodlebugs thru the array
     for (int i = 0; i < num_doodlebugs; i++) {
-        dir = doodlebugs[i]->move(board);
+        db = doodlebugs[i];
+        move_critter(db);
+
+        breed_critter(db);
+
+        if (db->will_starve())
+            remove_critter("Doodlebug", i);
     }
 
+    Ant * a;
     // Run Ants thru the array
+    for (int i = 0; i < num_ants; i++) {
+        a = ants[i];
+        move_critter(a);
+
+        breed_critter(a);
+    }
+
+    board.print_board();
 }
 
 int * Game::get_new_coordinates(int row, int col, char direction)
 {
     return board.get_new_coordinates(row, col, direction);
+}
+
+void Game::move_critter(Critter * critter)
+{
+    critter->age();
+    char dir = critter->check_move(board);
+    int c_row = critter->getRow(),
+        c_col = critter->getCol();
+    int * coords = get_new_coordinates(c_row, c_col, dir);
+
+    int new_row = coords[0],
+        new_col = coords[1];
+
+    std::string type = critter->get_type();
+    std::string new_cell_type = board.get_type(new_row, new_col, dir);
+
+        // Move only if new coordsinates are different
+    if (new_row != c_row || new_col != c_col)
+    {
+        if (type.compare("Doodlebug") == 0) // Doodlebug "eats" Ants
+        {
+            if (new_cell_type.compare("Ant") == 0)
+            {
+                int index = find_ant(new_row, new_col);
+                remove_critter("Ant", index);
+            }
+        }
+        critter->move(new_row, new_col, new_cell_type);
+        board.move_critter(c_row, c_col, dir);
+    }
+}
+
+
+/*************************************************************
+* Searches for ant when index is not known.
+* Returns the index when found
+*************************************************************/
+int Game::find_ant(int row, int col)
+{
+    Ant * a;
+    int a_row, a_col;
+    for (int i = 0; i < num_ants; i++)
+    {
+        a = ants[i];
+        a_row = a->getRow();
+        a_col = a->getCol();
+        if (a_row == row && a_col == col)
+            return i;
+    }
+    return -1;
+
+}
+
+void Game::breed_critter(Critter * critter)
+{
+    int c_row = critter->getRow(),
+        c_col = critter->getCol();
+
+    char breed_dir = critter->check_breed(board);
+    if (breed_dir != ' ')
+    {
+        int * coords = board.get_new_coordinates(c_row, c_col, breed_dir);
+        int new_row = coords[0];
+        int new_col = coords[1];
+
+        std::string critter_type = critter->get_type();
+
+        if (critter_type.compare("Ant") == 0)
+        {
+            create_ant(new_row, new_col);
+        }
+        else if (critter_type.compare("Doodlebug") == 0)
+        {
+            create_doodlebug(new_row, new_col);
+        }
+    }
+}
+
+void Game::remove_critter(std::string type, int index)
+{
+    if (type == "Ant")
+    {
+        Ant * a = ants[index];
+        ants.erase(ants.begin() + index);
+
+        delete a;
+        a = nullptr;
+
+        num_ants--;
+    }
+    else if (type == "Doodlebug")
+    {
+        Doodlebug * db = doodlebugs[index];
+        doodlebugs.erase(doodlebugs.begin() + index);
+
+        delete db;
+        db = nullptr;
+        num_doodlebugs--;
+    }
+}
+
+Game::~Game()
+{
+    while (!ants.empty()) {
+        delete ants.back();
+        ants.pop_back();
+    }
+
+    while (!doodlebugs.empty()) {
+        delete doodlebugs.back();
+        doodlebugs.pop_back();
+    }
 }

@@ -12,6 +12,8 @@
 #include "Ant.hpp"
 #include "Doodlebug.hpp"
 
+#include <vector>
+
 #include "Helper.hpp"
 
 class Game
@@ -23,8 +25,8 @@ private:
     void run_steps(int num_steps);
 
     // Array of ant pointers
-    Ant ** ants;
-    Doodlebug ** doodlebugs;
+    std::vector<Ant *> ants;
+    std::vector<Doodlebug *> doodlebugs;
 
     int num_ants;
     int num_doodlebugs;
@@ -34,12 +36,20 @@ private:
     void create_ant(int y, int x);
     void create_doodlebug(int y, int x);
 
-    void remove_ant(int y, int x);
+    void remove_critter(std::string type, int index);
+    int find_ant(int row, int col);
     void start_game();
 
     int * get_new_coordinates(int row, int col, char direction);
+
+    // Running move for each step for critter, not actual move function
+    void move_critter(Critter *);
+
+    void breed_critter(Critter *);
+
 public:
     Game();
+    ~Game();
 };
 
 #endif

@@ -19,7 +19,15 @@ private:
 public:
     Doodlebug(int r, int c);
     bool will_starve(); // checks if DoodleBug will starve, returns true if so
-    virtual char move(Board);
+    virtual char check_move(Board);
+    virtual void age() { 
+        life++;
+        steps_eaten++;
+    }; // Increase life by 1
+    void ate() {
+        steps_eaten = 0;
+    };
+    virtual void move(int row, int col, std::string type);
 };
 
 #endif

@@ -33,15 +33,27 @@ void Board::print_board()
     }
 }
 
-std::string Board::get_type(int row, int col)
+std::string Board::get_type(int row, int col, char dir)
 {
-    Critter * piece = board[row][col];
+    int new_row = row, new_col = col;
+    if (dir != ' ') {
+        int * new_coords = get_new_coordinates(row, col, dir);
+        new_row = new_coords[0];
+        new_col = new_coords[1];
+    }
+    Critter * piece = board[new_row][new_col];
     if (!piece) { // nullptr / Empty piece
         return "empty";
     }
     else {
         return piece->get_type();
     }
+}
+
+
+std::string Board::get_type(int row, int col)
+{
+    return get_type(row, col, ' ');
 }
 
 void Board::add_critter(int row, int col, Critter * c)
@@ -63,7 +75,7 @@ void Board::remove_critter(int row, int col)
 
 int * Board::get_new_coordinates(int row, int col, char direction)
 {
-    int coords[2] = {};
+    int coords[2] = {0};
     coords[0] = row;
     coords[1] = col;
 
@@ -81,7 +93,7 @@ int * Board::get_new_coordinates(int row, int col, char direction)
     else if (direction == 'R') // RIGHT
     {
         coords[1] += 1;
-    }
+    } // ' ' will lead to no change
 
     // Check if row is out of bounds
     if (coords[0] < 0)
@@ -95,4 +107,16 @@ int * Board::get_new_coordinates(int row, int col, char direction)
 
      return coords;
 
+}
+
+void Board::move_critter(int old_row, int old_col, char direction)
+{
+    int * new_coords = get_new_coordinates(old_row, old_col, direction);
+    int new_row = new_coords[0],
+        new_col = new_coords[1];
+
+    Critter * temp_crit = board[old_row][old_col];
+    board[old_row][old_col] = nullptr;
+    board[new_row][new_col] = temp_crit;
+    temp_crit = nullptr;
 }

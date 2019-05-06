@@ -16,7 +16,7 @@ Ant::Ant(int r, int c)
     type_name = "Ant";
 }
 
-char Ant::move(Board b)
+char Ant::check_move(Board b)
 {
     //Randomly pick 1 of 4 cardinal directions
     int breedDir = Helper::randInt(0, 3);

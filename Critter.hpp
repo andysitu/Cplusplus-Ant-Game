@@ -24,8 +24,9 @@ protected:
     int life; // num steps it has survived
 public:
     // NOTE: DIRECTIONS ARE 'R', 'L', 'U', 'D', AND ' '
-    virtual char move(Board b) = 0;
-    virtual char breed(Board b);
+    virtual char check_move(Board b) = 0;
+    virtual void move(int row, int col, std::string type);
+    virtual char check_breed(Board b);
 
     std::string get_type() { return type_name; }
 
@@ -34,7 +35,9 @@ public:
     void setRow(int);                  // Sets critter's row to int
     void setCol(int);                  // Sets critter's column to int
 
-    void age() { life++; } // Increase life by 1
+    virtual void age() { life++; } // Increase life by 1
+
+    void set_loc(int row, int col);
 };
 
 #endif

@@ -17,7 +17,7 @@ Doodlebug::Doodlebug(int r, int c)
 }
 
 // Doodlebug asks to move in char direction
-char Doodlebug::move(Board board)
+char Doodlebug::check_move(Board board)
 {
 
     int boardRow = board.get_num_row(),
@@ -32,7 +32,7 @@ char Doodlebug::move(Board board)
     //coordinates contain an ant. If so, ask to move there
     if (tempDown < boardRow)
     {
-        if (board.get_type(tempDown, col) == "Ant")
+        if (board.get_type(row, col, 'D').compare("Ant") == 0)
         {
             return 'D';
         }
@@ -40,7 +40,7 @@ char Doodlebug::move(Board board)
 
     else if (tempUp > 0)
     {
-        if (board.get_type(tempUp, col) == "Ant")
+        if (board.get_type(row, col, 'U').compare("Ant") == 0)
         {
             return 'U';
         }
@@ -48,7 +48,7 @@ char Doodlebug::move(Board board)
 
     else if (tempRight < boardCol)
     {
-        if (board.get_type(row, tempRight) == "Ant")
+        if (board.get_type(row, col, 'R') == "Ant")
         {
             return 'R';
         }
@@ -56,7 +56,7 @@ char Doodlebug::move(Board board)
 
     else if (tempLeft > 0)
     {
-        if (board.get_type(row, tempLeft) == "Ant")
+        if (board.get_type(row, col, 'L') == "Ant")
         {
             return 'L';
         }
@@ -81,4 +81,29 @@ char Doodlebug::move(Board board)
     //Left for 3
     else
         return 'L';
+}
+
+
+/*************************************************************
+* Moves Doodlebug and checks if the location had an ant.
+* If so, it has eaten
+*************************************************************/
+void Doodlebug::move(int new_row, int new_col, std::string type)
+{
+    if (type.compare("empty") == 0)
+    {
+        set_loc(new_row, new_col);
+    }
+    else if (type.compare("Ant") == 0)
+    {
+        set_loc(new_row, new_col);
+        ate();
+    }
+}
+
+bool Doodlebug::will_starve()
+{
+    if (steps_eaten >= 3)
+        return true;
+    return false;
 }

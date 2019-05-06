@@ -21,7 +21,7 @@ class Ant: public Critter
 {
 public:
     Ant(int, int);                // Constructor for ant coordinates are int, int   
-    virtual char move(Board b); // Critter asks to move in char direction
+    virtual char check_move(Board b); // Critter asks to move in char direction
 };
 
 #endif
