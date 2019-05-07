@@ -121,6 +121,9 @@ void Game::run_steps(int num_steps)
 
 void Game::run_step()
 {
+    // Run index backwards to solve problem of deleting objects in vector
+    // and breeding animals without running them until next turn. 
+
     // Run Doodlebugs thru the array
     int i = -1;
     Doodlebug * db;
@@ -135,11 +138,12 @@ void Game::run_step()
         if (db->will_starve()) {
             remove_critter("Doodlebug", i);
         }
-            
     }
 
+    Ant * a;
     // Run Ants thru the array
-    for (Ant * a: ants) {
+    for (int i = ants.size() - 1; i >= 0; i--) {
+        a = ants.at(i);
         move_critter(a);
 
         breed_critter(a);
@@ -157,7 +161,7 @@ void Game::move_critter(Critter * critter)
 {
     critter->age();
     char dir = critter->check_move(board);
-    int c_row = critter->getRow(),
+    int c_row = critter->getRow(),  
         c_col = critter->getCol();
 
     if (!board.out_of_bounds(c_row, c_col, dir))
