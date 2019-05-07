@@ -18,8 +18,6 @@
 *************************************************************/
 char Critter::check_breed(Board board)
 {
-    int boardRow = board.get_num_row(),
-        boardCol = board.get_num_col();
     // Direction to breed in, no direction = ' '
     char result = ' ';
 
@@ -32,7 +30,7 @@ char Critter::check_breed(Board board)
     bool checked[4] = { false, false, false, false };
 
     //Check all directions before returning default value
-    while (checked[0] != true && checked[1] != true && checked[2] != true && checked[3] != true)
+    while (checked[0] != true || checked[1] != true || checked[2] != true || checked[3] != true)
     {
         //Choose random move direction
         int breedDir = Helper::randInt(0, 3);
@@ -56,7 +54,7 @@ char Critter::check_breed(Board board)
         {
             checked[1] = true;
             if (!board.out_of_bounds(row, col, 'R') &&
-                board.get_type(row, row, 'R').compare("empty") == 0)
+                board.get_type(row, col, 'R').compare("empty") == 0)
             {
                 result = 'R';
                 return result;
@@ -87,6 +85,7 @@ char Critter::check_breed(Board board)
             }
         }
     }
+
     return result;
 }
 

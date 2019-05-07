@@ -55,6 +55,7 @@ std::string Board::get_type(int row, int col, char dir)
 std::string Board::get_type(int row, int col)
 {
     Critter * piece = board[row][col];
+    
     if (!piece) { // nullptr / Empty piece
         return "empty";
     }
@@ -84,23 +85,6 @@ bool Board::out_of_bounds(int row, int col, char direction)
 {
     int * coords = get_new_coordinates(row, col, direction);
     
-
-    if (direction == 'U') { // UP
-        coords[0]--;
-    }
-    else if (direction == 'D') // DOWN
-    {
-        coords[0]++;
-    }
-    else if (direction == 'L') // LEFT
-    {
-        coords[1]--;
-    }
-    else if (direction == 'R') // RIGHT
-    {
-        coords[1]++;
-    }
-
     if (coords[0] < 0)
         return true;
     if (coords[0] > num_row - 1)

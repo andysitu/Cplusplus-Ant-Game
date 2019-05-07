@@ -40,10 +40,10 @@ void Game::start_game()
 
     while (!correct_num_bugs) { // Make sure that # bugs does not exceed board
         std::cout << "How many ants would you like?" << std::endl;
-        ants_input = Helper::getIntInput(1, 100);
+        ants_input = Helper::getIntInput(0, 100);
 
         std::cout << "How many doodlebugs would you like?" << std::endl;
-        doodlebugs_input = Helper::getIntInput(1, 100);
+        doodlebugs_input = Helper::getIntInput(0, 100);
 
         if ((doodlebugs_input + ants_input) <= (row * col)) {
             correct_num_bugs = true;
@@ -130,10 +130,9 @@ void Game::run_step()
     for (int i = doodlebugs.size() -1; i >= 0; i--)
     {
         db = doodlebugs.at(i);
-        //std::cout << i << " " << doodlebugs.size() << std::endl;
         move_critter(db);
 
-       //breed_critter(db);
+       breed_critter(db);
 
         if (db->will_starve()) {
             remove_critter("Doodlebug", i);
@@ -231,6 +230,7 @@ void Game::breed_critter(Critter * critter)
         int new_row = coords[0];
         int new_col = coords[1];
 
+
         std::string critter_type = critter->get_type();
         if (board.get_type(c_row, c_col, breed_dir).compare("empty") == 0) {
             if (critter_type.compare("Ant") == 0)
@@ -241,9 +241,6 @@ void Game::breed_critter(Critter * critter)
             {
                 create_doodlebug(new_row, new_col);
             }
-        }
-        else {
-            std::cout << "ERROR" << std::endl;
         }
         
     }
