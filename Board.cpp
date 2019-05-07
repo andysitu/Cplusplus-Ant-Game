@@ -143,3 +143,13 @@ void Board::move_critter(int old_row, int old_col, char direction)
     }
     
 }
+
+void Board::delete_board()
+{
+    for (int i = 0; i < num_row; i++) {
+        delete [] board[i];
+        board[i] = nullptr;
+    }
+    delete[] board;
+    board = nullptr;
+}

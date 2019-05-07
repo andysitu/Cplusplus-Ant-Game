@@ -21,6 +21,7 @@ private:
     int num_row;
     int num_col;
 public:
+    void delete_board();
     void print_board();
     void add_critter(int y, int x, Critter *);
     void move_critter(int old_row, int old_col, char direction);

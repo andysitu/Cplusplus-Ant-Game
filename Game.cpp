@@ -279,4 +279,6 @@ Game::~Game()
         delete doodlebugs.back();
         doodlebugs.pop_back();
     }
+
+    board.delete_board();
 }
