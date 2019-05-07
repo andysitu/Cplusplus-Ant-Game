@@ -98,29 +98,28 @@ bool Board::out_of_bounds(int row, int col, char direction)
 
 int * Board::get_new_coordinates(int row, int col, char direction)
 {
-    int coords[2] = {0};
-    coords[0] = row;
-    coords[1] = col;
+    temp_coords[0] = row;
+    temp_coords[1] = col;
 
     if (direction == 'U') { // UP
-        coords[0]--;
+        temp_coords[0]--;
     }
     else if (direction == 'D') // DOWN
     {
-        coords[0]++;
+        temp_coords[0]++;
     }
     else if (direction == 'L') // LEFT
     {
-        coords[1]--;
+        temp_coords[1]--;
     }
     else if (direction == 'R') // RIGHT
     {
-        coords[1]++;
+        temp_coords[1]++;
     } 
     // ' ' will lead to no change
 
     //std::cout << direction << " " << row << " " << col << " " << coords[0] << " " << coords[1] << std::endl;
-     return coords;
+     return temp_coords;
 
 }
 

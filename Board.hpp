@@ -20,6 +20,7 @@ private:
     Critter *** board = nullptr;
     int num_row;
     int num_col;
+    int temp_coords[2] = { 0 };
 public:
     void delete_board();
     void print_board();
