@@ -50,7 +50,6 @@ char Critter::check_breed(Board board)
                     result = 'U';
                     return result;
                 }
-                checked[0] = true;
             }
         }
 
@@ -65,7 +64,6 @@ char Critter::check_breed(Board board)
                     result = 'R';
                     return result;
                 }
-                checked[1] = true;
             }
         }
 
@@ -80,13 +78,13 @@ char Critter::check_breed(Board board)
                     result = 'D';
                     return result;
                 }
-                checked[2] = true;
             }
         }
 
         //Direction left chosen
         else if (breedDir == 3)
         {
+            checked[3] = true;
             if(!board.out_of_bounds(row, col, 'L'))
             {
                 if (board.get_type(row, col, 'L').compare("empty") == 0)
@@ -94,7 +92,7 @@ char Critter::check_breed(Board board)
                     result = 'L';
                     return result;
                 }
-                checked[3] = true;
+                
             }
         }
     }

@@ -133,7 +133,7 @@ void Game::run_step()
         //std::cout << i << " " << doodlebugs.size() << std::endl;
         move_critter(db);
 
-        breed_critter(db);
+       //breed_critter(db);
 
         if (db->will_starve()) {
             remove_critter("Doodlebug", i);
@@ -146,7 +146,7 @@ void Game::run_step()
         a = ants.at(i);
         move_critter(a);
 
-        breed_critter(a);
+        //breed_critter(a);
     }
 
     board.print_board();
@@ -217,7 +217,6 @@ int Game::find_ant(int row, int col)
             return i;
     }
     return -1;
-
 }
 
 void Game::breed_critter(Critter * critter)
@@ -226,7 +225,6 @@ void Game::breed_critter(Critter * critter)
         c_col = critter->getCol();
 
     char breed_dir = critter->check_breed(board);
-    std::cout << "Breed_dir" << breed_dir << std::endl;
     if (breed_dir != ' ')
     {
         int * coords = board.get_new_coordinates(c_row, c_col, breed_dir);
