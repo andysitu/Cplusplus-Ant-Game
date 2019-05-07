@@ -41,15 +41,13 @@ char Critter::check_breed(Board board)
         if (breedDir == 0)
         {
             checked[0] = true; //Mark the direction as checked
-            if(!board.out_of_bounds(row, col, 'U'))
+            //Check if spot empty
+            if (!board.out_of_bounds(row, col, 'U') &&
+                board.get_type(row, col, 'U').compare("empty") == 0)
             {
-                //Check if spot empty
-                if (board.get_type(row, col, 'U').compare("empty") == 0)
-                {
-                    //Set return direction
-                    result = 'U';
-                    return result;
-                }
+                //Set return direction
+                result = 'U';
+                return result;
             }
         }
 
@@ -57,13 +55,11 @@ char Critter::check_breed(Board board)
         else if (breedDir == 1)
         {
             checked[1] = true;
-            if(!board.out_of_bounds(row, col, 'R'))
+            if (!board.out_of_bounds(row, col, 'R') &&
+                board.get_type(row, row, 'R').compare("empty") == 0)
             {
-                if (board.get_type(row, row, 'R').compare("empty") == 0)
-                {
-                    result = 'R';
-                    return result;
-                }
+                result = 'R';
+                return result;
             }
         }
 
@@ -71,13 +67,11 @@ char Critter::check_breed(Board board)
         else if (breedDir == 2)
         {
             checked[2] = true;
-            if(!board.out_of_bounds(row, col, 'D'))
+            if (!board.out_of_bounds(row, col, 'D') &&
+                board.get_type(row, col, 'D').compare("empty") == 0)
             {
-                if (board.get_type(row, col, 'D').compare("empty") == 0)
-                {
-                    result = 'D';
-                    return result;
-                }
+                result = 'D';
+                return result;
             }
         }
 
@@ -85,14 +79,11 @@ char Critter::check_breed(Board board)
         else if (breedDir == 3)
         {
             checked[3] = true;
-            if(!board.out_of_bounds(row, col, 'L'))
+            if (!board.out_of_bounds(row, col, 'L') &&
+                board.get_type(row, col, 'L').compare("empty") == 0)
             {
-                if (board.get_type(row, col, 'L').compare("empty") == 0)
-                {
-                    result = 'L';
-                    return result;
-                }
-                
+                result = 'L';
+                return result;
             }
         }
     }

@@ -97,11 +97,11 @@ void Game::start_game()
 
 void Game::create_ant(int row, int col)
 {
-    Ant * a =  new Ant( row, col);
+    Ant * a = new Ant(row, col);
     board.add_critter(row, col, a);
 
-
     ants.push_back(a);
+    
 }
 
 void Game::create_doodlebug(int row, int col)
@@ -146,7 +146,7 @@ void Game::run_step()
         a = ants.at(i);
         move_critter(a);
 
-        //breed_critter(a);
+        breed_critter(a);
     }
 
     board.print_board();
@@ -171,7 +171,7 @@ void Game::move_critter(Critter * critter)
             new_col = coords[1];
 
         std::string type = critter->get_type();
-        std::string next_cell_type = board.get_type(new_row, new_col);
+        std::string next_cell_type = board.get_type(c_row, c_col, dir);
 
         // Move only if new coordsinates are different
         if (new_row != c_row || new_col != c_col)
@@ -232,21 +232,25 @@ void Game::breed_critter(Critter * critter)
         int new_col = coords[1];
 
         std::string critter_type = critter->get_type();
-
-        if (critter_type.compare("Ant") == 0)
-        {
-            create_ant(new_row, new_col);
+        if (board.get_type(c_row, c_col, breed_dir).compare("empty") == 0) {
+            if (critter_type.compare("Ant") == 0)
+            {
+                create_ant(new_row, new_col);
+            }
+            else if (critter_type.compare("Doodlebug") == 0)
+            {
+                create_doodlebug(new_row, new_col);
+            }
         }
-        else if (critter_type.compare("Doodlebug") == 0)
-        {
-            create_doodlebug(new_row, new_col);
+        else {
+            std::cout << "ERROR" << std::endl;
         }
+        
     }
 }
 
 void Game::remove_critter(std::string type, int index)
 {
-    
     int row, col;
     if (type == "Ant")
     {
