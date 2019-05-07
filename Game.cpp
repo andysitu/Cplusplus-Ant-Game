@@ -27,10 +27,10 @@ void Game::start_game()
     std::cout << "What size board would you like?" << std::endl;
     std::cout << "Please enter an integer for row size." << std::endl;
 
-    int row = Helper::getIntInput(10, 100);
+    int row = Helper::getIntInput(10, 75);
 
     std::cout << "Please enter an integer for col size." << std::endl;
-    int col = Helper::getIntInput(10, 100);
+    int col = Helper::getIntInput(10, 75);
 
     board.create_board(row, col);
 
@@ -40,10 +40,10 @@ void Game::start_game()
 
     while (!correct_num_bugs) { // Make sure that # bugs does not exceed board
         std::cout << "How many ants would you like?" << std::endl;
-        ants_input = Helper::getIntInput(0, 100);
+        ants_input = Helper::getIntInput(0, 200);
 
         std::cout << "How many doodlebugs would you like?" << std::endl;
-        doodlebugs_input = Helper::getIntInput(0, 100);
+        doodlebugs_input = Helper::getIntInput(0, 200);
 
         if ((doodlebugs_input + ants_input) <= (row * col)) {
             correct_num_bugs = true;
@@ -82,13 +82,13 @@ void Game::start_game()
 
     board.print_board();
     std::cout << "How many steps would you like to run of the simulatin?" << std::endl;
-    num_steps = Helper::getIntInput(1, 10000);
+    num_steps = Helper::getIntInput(1, 50);
     run_steps(num_steps);
 
     while (num_steps > 0) {
         std::cout << "How many steps would you like to run of the simulatin?" << std::endl;
         std::cout << "Enter 0 to quit the game." << std::endl;
-        num_steps = Helper::getIntInput(0, 10000);
+        num_steps = Helper::getIntInput(0, 50);
 
         if (num_steps)
             run_steps(num_steps);
