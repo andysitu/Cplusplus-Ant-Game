@@ -41,27 +41,26 @@ void Board::print_board()
 
 std::string Board::get_type(int row, int col, char dir)
 {
-    int new_row = row, 
-        new_col = col;
+    int new_row, 
+        new_col;
 
-    if (dir != ' ') {
-        int * new_coords = get_new_coordinates(row, col, dir);
-        new_row = new_coords[0];
-        new_col = new_coords[1];
-    }
-    Critter * piece = board[new_row][new_col];
+    int * new_coords = get_new_coordinates(row, col, dir);
+    new_row = new_coords[0];
+    new_col = new_coords[1];
+
+    return get_type(new_row, new_col);
+}
+
+
+std::string Board::get_type(int row, int col)
+{
+    Critter * piece = board[row][col];
     if (!piece) { // nullptr / Empty piece
         return "empty";
     }
     else {
         return piece->get_type();
     }
-}
-
-
-std::string Board::get_type(int row, int col)
-{
-    return get_type(row, col, ' ');
 }
 
 void Board::add_critter(int row, int col, Critter * c)
@@ -84,6 +83,7 @@ void Board::remove_critter(int row, int col)
 bool Board::out_of_bounds(int row, int col, char direction)
 {
     int * coords = get_new_coordinates(row, col, direction);
+    
 
     if (direction == 'U') { // UP
         coords[0]--;
