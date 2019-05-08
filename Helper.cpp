@@ -3,7 +3,8 @@
 * Author: Andy Situ
 * Date: 4/19/2019
 * Description: Helper class declaration with static functions
-*   Used to get int input
+*   Used to get int input and random integer as a helper class.
+*   Contains static functions only.
 **********************************************************************/
 
 #include "Helper.hpp"

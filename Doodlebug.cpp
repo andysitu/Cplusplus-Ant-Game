@@ -2,11 +2,16 @@
 * Group # 4
 * Program name: Doodlebug.cpp
 * Date: 5/4/2019
-* Description:
+* Description: Source file for Doodlebug class
+*   Consists of functions that are overriding virtual ones 
+*   from the Critter class and the constructor.
 *************************************************************/
 
 #include "Doodlebug.hpp"
 
+/*************************************************************
+* Constructor of Doodlebug. Sets the member variables up.
+*************************************************************/
 Doodlebug::Doodlebug(int r, int c)
 {
     adult_life = 8;
@@ -16,7 +21,12 @@ Doodlebug::Doodlebug(int r, int c)
     type_name = "Doodlebug";
 }
 
-// Doodlebug asks to move in char direction
+/*************************************************************
+* Doodlebug checks if there is an ant and moves there if so,
+*   if not, then it checks for an empty spot.
+* Returns the spot that it was to by by char
+*   'U', 'D', 'R', 'L' for down, up, left, right
+*************************************************************/
 char Doodlebug::check_move(Board board)
 {
 
@@ -85,6 +95,9 @@ void Doodlebug::move(int new_row, int new_col, std::string prev_cell_type)
     }
 }
 
+/*************************************************************
+* Returns bool of whether it will starve that turn
+*************************************************************/
 bool Doodlebug::will_starve()
 {
     if (steps_eaten >= 3)

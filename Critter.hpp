@@ -1,9 +1,9 @@
 /*************************************************************
 *  Author: David Martinez, Andy Situ
 *  Date: 5/4/19
-*  Description: This is the header file for the critter base class for CS162's group project.
-*  This file lists the member variables and function prototypes for used for the predator-prey
-*  game.
+*  Description: Headerfile for Critter class
+*  This file lists the member variables and function prototypes 
+*  for used for the predator-prey game.
 *************************************************************/
 #ifndef CRITTER_HPP
 #define CRITTER_HPP
@@ -32,8 +32,8 @@ public:
 
     int getRow();                 // Returns critter's row as int
     int getCol();                 // Returns critter's column as int
-    void setRow(int);                  // Sets critter's row to int
-    void setCol(int);                  // Sets critter's column to int
+    void setRow(int);
+    void setCol(int);
 
     virtual void age() { life++; } // Increase life by 1
 

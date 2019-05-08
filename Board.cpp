@@ -2,11 +2,17 @@
 * Group # 4
 * Program name: Board.cpp
 * Date: 5/4/2019
-* Description:
+* Description: Source file for Board class
+*   Implementation in Board which contains the critter pointers
+*   in a 2D dynamic array for the prey-predator game of critters.
 *************************************************************/
 
 #include "Board.hpp"
 
+/*************************************************************
+* Create the board - the 2D dynamic array that will contain
+*   the pointers to the critters, Ant and Doodlebug.
+*************************************************************/
 void Board::create_board(int row, int col)
 {
     num_col = col;
@@ -17,6 +23,11 @@ void Board::create_board(int row, int col)
     }
 }
 
+/*************************************************************
+* Prints out the 2D array of the pointers of critters. 
+*   "O" for ant and "X" for doodlebug. " " for empty space.
+*   to terminal.
+*************************************************************/
 void Board::print_board()
 {
     int border_length = num_col + 2;
@@ -39,6 +50,13 @@ void Board::print_board()
     std::cout << border << std::endl;
 }
 
+/*************************************************************
+* Returns the type of the new location by giving the original
+*   row and column as integers for the index in the array
+*   and the direction to travel to in character
+*   'U', 'D', 'R', 'L' for down, up, left, right
+* Returns the string as either "Ant", "Doodlebug" or "empty
+*************************************************************/
 std::string Board::get_type(int row, int col, char dir)
 {
     int new_row, 
@@ -51,7 +69,12 @@ std::string Board::get_type(int row, int col, char dir)
     return get_type(new_row, new_col);
 }
 
-
+/*************************************************************
+* Returns the type of the location by giving the 
+*   row and column as integers for the index in the array
+*   'U', 'D', 'R', 'L' for down, up, left, right
+* Returns the string as either "Ant", "Doodlebug" or "empty
+*************************************************************/
 std::string Board::get_type(int row, int col)
 {
     Critter * piece = board[row][col];
@@ -64,6 +87,9 @@ std::string Board::get_type(int row, int col)
     }
 }
 
+/*************************************************************
+* Adds the critter to board by pointer.
+*************************************************************/
 void Board::add_critter(int row, int col, Critter * c)
 {
     // If it's not blank, delete the old critter
@@ -73,6 +99,9 @@ void Board::add_critter(int row, int col, Critter * c)
     board[row][col] = c;
 }
 
+/*************************************************************
+* Removes the critter from board and frees up the memory.
+*************************************************************/
 void Board::remove_critter(int row, int col)
 {
     if (board[row][col]) {
@@ -81,6 +110,12 @@ void Board::remove_critter(int row, int col)
     }
 }
 
+/*************************************************************
+* Checks if the new location provided in the original row,
+*   and column with the new direction will be out of bounds
+*   in terms of the 2d array.
+* Returns true if it will be out of bounds. False, otherwise
+*************************************************************/
 bool Board::out_of_bounds(int row, int col, char direction)
 {
     int * coords = get_new_coordinates(row, col, direction);
@@ -96,6 +131,13 @@ bool Board::out_of_bounds(int row, int col, char direction)
     return false;
 }
 
+/*************************************************************
+* Rol and Column given as integers. Direction for the direction
+*   new location from the current one. 'U', 'D', 'R', 'L' are the
+*   directions given.
+* Returns an int pointer for an int array will contain [row, column]
+*   for the new coordinates.
+*************************************************************/
 int * Board::get_new_coordinates(int row, int col, char direction)
 {
     temp_coords[0] = row;
@@ -123,6 +165,10 @@ int * Board::get_new_coordinates(int row, int col, char direction)
 
 }
 
+/*************************************************************
+* Moves the critter from the original location to the new one
+*   decided by the direction character: 'U', 'D', 'R', 'L'
+*************************************************************/
 void Board::move_critter(int old_row, int old_col, char direction)
 {
     if (get_type(old_row, old_col, direction).compare("empty") == 0)
@@ -143,6 +189,10 @@ void Board::move_critter(int old_row, int old_col, char direction)
     
 }
 
+/*************************************************************
+* Deletes board, the 2D dynamic array when the game ends.
+*   Called by the game class. 
+*************************************************************/
 void Board::delete_board()
 {
     for (int i = 0; i < num_row; i++) {

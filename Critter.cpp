@@ -2,10 +2,10 @@
 * Group # 4
 * Program name: Critter.cpp
 * Date: 5/4/2019
-* Description: This is the source file for the ant class for CS162's group project. The ant 
-*  class is derived from the critter base class detailed in "critter.hpp".
-*  This file implements the member variables and functions for used for the predator-prey
-*  game used for ants.
+* Description: Source file for Critter class.
+*  Derived from the critter base class detailed in "critter.hpp".
+*  This file implements the member variables and functions for used 
+*  for the predator-prey game used for ants.
 *************************************************************/
 
 #include "Critter.hpp"
@@ -121,6 +121,11 @@ void Critter::set_loc(int r, int c)
     col = c;
 }
 
+
+/*************************************************************
+* Critter moves to a new location. Checks that it's empty
+*   and changes the row, and col.
+*************************************************************/
 void Critter::move(int new_row, int new_col, std::string new_cell_type)
 {
     if (new_cell_type.compare("empty") == 0)

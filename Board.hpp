@@ -2,7 +2,9 @@
 * Group # 4
 * Program name: Board.hpp
 * Date: 5/4/2019
-* Description:
+* Description: Header files for Board class.
+*   Handles board which is a 2D array containing the critter
+*   pointers and the propagation and  deletion of the ptrs.
 *************************************************************/
 
 #ifndef BOARD_HPP

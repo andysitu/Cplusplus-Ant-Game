@@ -3,7 +3,7 @@
 * Author: Andy Situ
 * Date: 4/19/2019
 * Description: Helper class declaration with static functions
-*   Used to get int input
+*   Used to get int input and a random integer.
 **********************************************************************/
 
 #ifndef HELPER_HPP

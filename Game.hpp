@@ -2,7 +2,9 @@
 * Group # 4
 * Program name: Game.hpp
 * Date: 5/4/2019
-* Description:
+* Description: Header class files of Game.
+*   Runs the game itself and handles everything, from creating
+*   of critters to the board class to user input & output.
 *************************************************************/
 
 #ifndef GAME_HPP
@@ -19,12 +21,14 @@
 class Game
 {
 private:
+    // Contains the 2D array of the pointers.
     Board board;
     void run_step();
-    void run_steps(int num_steps);
+    void run_steps(int num_steps); // Uses run_step for num_steps
 
-    // Array of ant pointers
+    // Vector of ant pointers
     std::vector<Ant *> ants;
+    // Vector of the doodlebug pointers 
     std::vector<Doodlebug *> doodlebugs;
 
     void create_ant(int y, int x);
@@ -43,7 +47,7 @@ private:
 
 public:
     Game();
-    ~Game();
+    ~Game(); // Deletes the critter pointers & board dynamic arrays
 };
 
 #endif
