@@ -29,11 +29,6 @@ Doodlebug::Doodlebug(int r, int c)
 *************************************************************/
 char Doodlebug::check_move(Board board)
 {
-
-    int boardRow = board.get_num_row(),
-        boardCol = board.get_num_col();
-
-
     //Checks for ants
     if (!board.out_of_bounds(row, col, 'D'))
         if (board.get_type(row, col, 'D').compare("Ant") == 0)

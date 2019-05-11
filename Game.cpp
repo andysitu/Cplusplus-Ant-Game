@@ -147,7 +147,6 @@ void Game::run_step()
     // and breeding animals without running them until next turn. 
 
     // Run Doodlebugs thru the vector
-    int i = -1;
     Doodlebug * db;
     for (int i = doodlebugs.size() -1; i >= 0; i--)
     {
