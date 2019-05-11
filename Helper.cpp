@@ -33,7 +33,7 @@ int Helper::getIntInput(int minValue, int maxValue)
     while (!correctInput) {
         bool correctFormat = true;
         cout << "Please enter ONLY an integer between " << minValue <<
-            " and " << maxValue << " (No spacing, lettrs, etc.)" << endl;
+            " and " << maxValue << " (No spacing, letters, etc.)" << endl;
         std::getline(std::cin, input);
 
         // Check that each char is an int

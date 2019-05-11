@@ -27,6 +27,9 @@ Game::Game()
 void Game::start_game()
 {
     std::cout << "CS 162 Group Project" << std::endl;
+    std::cout << std::endl;
+    std::cout << "**with Extra Credit**" << std::endl;
+    std::cout << std::endl;
     std::cout << "What size board would you like?" << std::endl;
     std::cout << "Please enter an integer for row size." << std::endl;
 
@@ -88,12 +91,12 @@ void Game::start_game()
 
     // Ask user how many steps they want and run game until user quits
     board.print_board();
-    std::cout << "How many steps would you like to run of the simulatin?" << std::endl;
+    std::cout << "How many steps would you like to run of the simulation?" << std::endl;
     num_steps = Helper::getIntInput(1, 50);
     run_steps(num_steps);
 
     while (num_steps > 0) {
-        std::cout << "How many steps would you like to run of the simulatin?" << std::endl;
+        std::cout << "How many steps would you like to run of the simulation?" << std::endl;
         std::cout << "Enter 0 to quit the game." << std::endl;
         num_steps = Helper::getIntInput(0, 50);
 
